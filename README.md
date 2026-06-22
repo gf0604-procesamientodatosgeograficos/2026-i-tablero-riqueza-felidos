@@ -1,5 +1,9 @@
 # Tablero de control de riqueza de félidos de Costa Rica
 
+[![Tablero de control de riqueza de félidos de Costa Rica](img/portada.png)](https://gf0604-procesamientodatosgeograficos.github.io/2026-i-tablero-riqueza-felidos/)
+
+> 🔗 **[Ver el tablero en vivo](https://gf0604-procesamientodatosgeograficos.github.io/2026-i-tablero-riqueza-felidos/)**
+
 Tablero de control desarrollado con [Quarto Dashboards](https://quarto.org/docs/dashboards/)
 que presenta la riqueza de especies de félidos silvestres (familia *Felidae*) en Costa Rica,
 con base en registros de presencia de [GBIF](https://www.gbif.org/) y los polígonos de las
@@ -22,6 +26,13 @@ quarto render
 quarto preview
 ```
 
-La salida se genera en `docs/` y se publica en GitHub Pages desde esa carpeta en la rama `main`.
-Los datos se cargan en tiempo de ejecución desde el repositorio del curso
+El render local genera la salida en `docs/` (no se versiona). Los datos se cargan en
+tiempo de ejecución desde el repositorio del curso
 [`2026-i`](https://github.com/gf0604-procesamientodatosgeograficos/2026-i).
+
+## Publicación
+
+La publicación en GitHub Pages es **automática**: al hacer *push* de cambios en `index.qmd`
+a la rama `main`, un flujo de trabajo de [GitHub Actions](.github/workflows/publicar.yml)
+renderiza el tablero con Quarto y lo despliega. No es necesario renderizar localmente ni
+versionar la carpeta `docs/`.

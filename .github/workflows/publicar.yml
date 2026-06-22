@@ -30,8 +30,7 @@ jobs:
       - name: Clonar el repositorio
         uses: actions/checkout@v4
 
-      - name: Instalar Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
+      # Quarto ya viene incluido en la imagen rocker/geospatial.
 
       - name: Instalar paquetes de R faltantes
         run: |

@@ -16,3 +16,6 @@
 .Renviron
 
 **/*.quarto_ipynb
+
+# Salida renderizada: la genera y publica el workflow de GitHub Actions
+/docs/

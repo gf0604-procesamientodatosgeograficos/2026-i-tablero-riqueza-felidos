@@ -1,0 +1,62 @@
+name: Renderizar y publicar el tablero
+
+# Renderiza el tablero con Quarto y lo publica en GitHub Pages.
+# Se ejecuta al actualizar el código fuente y también de forma manual.
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.qmd
+      - _quarto.yml
+      - .github/workflows/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evita despliegues simultáneos; no cancela uno en curso.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    container:
+      image: rocker/geospatial:4.5.2
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Instalar Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Instalar paquetes de R faltantes
+        run: |
+          Rscript -e 'pk <- c("plotly", "DT", "leaflet.extras");
+                      faltan <- pk[!pk %in% rownames(installed.packages())];
+                      if (length(faltan)) install.packages(faltan, repos = "https://cloud.r-project.org")'
+
+      - name: Renderizar el tablero
+        env:
+          GDAL_HTTP_MAX_RETRY: "5"
+          GDAL_HTTP_RETRY_DELAY: "3"
+        run: quarto render
+
+      - name: Subir el sitio como artefacto de Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: Desplegar a GitHub Pages
+        id: despliegue
+        uses: actions/deploy-pages@v4

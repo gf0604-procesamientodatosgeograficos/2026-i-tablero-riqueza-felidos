@@ -1,0 +1,18 @@
+# Archivos de historial y sesión de R
+.Rhistory
+.RData
+.RDataTmp
+.Ruserdata
+
+# RStudio
+.Rproj.user/
+
+# Quarto
+/.quarto/
+*_cache/
+*.quarto_ipynb
+
+# Variables de entorno
+.Renviron
+
+**/*.quarto_ipynb

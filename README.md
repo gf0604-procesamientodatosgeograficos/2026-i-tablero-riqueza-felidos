@@ -26,9 +26,9 @@ quarto render
 quarto preview
 ```
 
-El render local genera la salida en `docs/` (no se versiona). Los datos se cargan en
-tiempo de ejecución desde el repositorio del curso
-[`2026-i`](https://github.com/gf0604-procesamientodatosgeograficos/2026-i).
+El render local genera la salida en `docs/` (no se versiona). Los conjuntos de datos
+están incluidos en este mismo repositorio (carpeta `datos/`) y se cargan con rutas
+locales, de modo que el repositorio es **reproducible** por sí solo (código + datos).
 
 ## Publicación
 

@@ -19,3 +19,6 @@
 
 # Salida renderizada: la genera y publica el workflow de GitHub Actions
 /docs/
+
+# Archivos auxiliares que GDAL genera al leer las capas (no son datos fuente)
+*.aux.xml
